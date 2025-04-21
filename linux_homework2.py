@@ -73,19 +73,18 @@ parser.add_argument(
 args = parser.parse_args()
 logs_path = "/home/masha/" + args.folder
 
-try:
-    if os.path.isdir(logs_path):
-        list_logs = os.listdir(logs_path)
+if os.path.isdir(logs_path):
+    list_logs = os.listdir(logs_path)
 
-        for file_name in list_logs:
-            file_path = logs_path + "/" + file_name
+    for file_name in list_logs:
+        file_path = logs_path + "/" + file_name
         result = parsing_file(file_path)
         json_data = json.dumps(result, indent=4)
         print(json_data)
 
-    elif os.path.isfile(logs_path):
-        result = parsing_file(logs_path)
-        json_data = json.dumps(result, indent=4)
-        print(json_data)
-except FileNotFoundError:
-    print("Incorrect file name or directory")
+elif os.path.isfile(logs_path):
+    result = parsing_file(logs_path)
+    json_data = json.dumps(result, indent=4)
+    print(json_data)
+else:
+    print("File or directory is not correct")
